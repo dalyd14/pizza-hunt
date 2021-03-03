@@ -36,7 +36,7 @@ const pizzaSchema = new Schema(
 )
 
 pizzaSchema.virtual('commentsCount').get(function() {
-    return this.comments.length
+    return this.comments.reduce((total, comment) => total + comment.replies.length + 1, 0)
 })
 
 const Pizza = model('Pizza', pizzaSchema)
